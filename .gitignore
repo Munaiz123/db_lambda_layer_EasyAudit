@@ -1,0 +1,6 @@
+.env
+.vscode
+src.zip
+layer.zip
+nodejs/node_modules
+nodejs.zip

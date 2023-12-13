@@ -1,0 +1,17 @@
+{
+    "name": "db-lambda-layer",
+    "version": "1.0.0",
+    "description": "lambda layer for database",
+    "main": "dbConnection.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Munaiz",
+    "license": "ISC",
+    "dependencies": {
+      "dotenv": "^16.3.1",
+      "pg": "^8.11.3",
+      "pg-promise": "^11.5.4"
+    }
+  }
+  
