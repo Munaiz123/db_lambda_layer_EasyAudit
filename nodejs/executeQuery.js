@@ -1,18 +1,29 @@
-const pool = require('./dbConnection')
+const dbConn = require('./dbConnection')
 
-module.exports.executeQuery = async (query) => {
+module.exports = async  (query) => {
     let queryResults = null;
 
     console.log('Opening DB Connection')
+    let pool = await dbConn.openPool()
+
     try {
-        const response = await pool.query(query);
-        queryResults = response
+        pool.query(query, (error, res) =>{
+            if(error){
+                console.log('DB Lambda Layer - executeQuery.js - ERROR::: ', error)
+                return [error, null]
+            }
+            else{
+                queryResults = res
+            }
+        })
+
     } catch (error){
         console.log('DB Lambda Layer - executeQuery.js - ERROR::: ', error)
         return [error, null]
 
     } finally {
-        pool.end();
+        console.log('Closing Pool...')
+        await pool.end();
         console.log("***Closed DB Pool Connection***")
         return [null, queryResults]
     }
